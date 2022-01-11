@@ -1,5 +1,9 @@
 # unkitkr
 
+### Build status
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/84a97efe-92ce-4367-beb1-8cfe4333972c/deploy-status)](https://app.netlify.com/sites/unkitkr/deploys)
+
 ## Build Setup
 
 ```bash
