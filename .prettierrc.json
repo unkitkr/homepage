@@ -1,0 +1,5 @@
+{
+    "html.format.wrapAttributes": "auto",
+    "html.format.wrapLineLength": 10000,
+    "printWidth": 10000
+}
