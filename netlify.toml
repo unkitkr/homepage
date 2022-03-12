@@ -1,0 +1,6 @@
+[dev]
+  functions = "app"
+  functionsPort = 7000
+
+[functions]
+  directory = "app"
