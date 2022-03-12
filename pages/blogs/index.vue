@@ -129,23 +129,11 @@ a:hover {
 export default {
   async asyncData({ $content }) {
     const articles = await $content("/").only(["title", "description", "img", "slug", "author", "createdAt"]).sortBy("createdAt", "desc").fetch();
+    // console.log(articles);
     return {
       articles,
     };
   },
-  // methods: {
-  //   async getArticles() {
-  //     this.articles = await this.$content("/").only(["title", "description", "img", "slug", "author", "createdAt"]).sortBy("createdAt", "desc").fetch();
-  //   },
-  // },
-  // async created() {
-  //   await this.getArticles();
-  // },
-  // data: () => {
-  //   return {
-  //     articles: [],
-  //   };
-  // },
   layout: "header",
 };
 </script>
