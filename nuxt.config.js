@@ -35,20 +35,10 @@ export default {
     // https://go.nuxtjs.dev/content
     "@nuxt/content",
   ],
-
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: "/",
-  },
-
-  generate: {
-    async routes() {
-      const { $content } = require("@nuxt/content");
-      const files = await $content({ deep: true }).only(["path"]).fetch();
-
-      return files.map((file) => (file.path === "/index" ? "/" : file.path));
-    },
   },
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
