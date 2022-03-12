@@ -25,10 +25,6 @@
   color: rgb(255, 255, 255);
   margin-top: 50px;
 }
-
-pre {
-  background-color: #f6ff00 !important;
-}
 </style>
 
 <script>
