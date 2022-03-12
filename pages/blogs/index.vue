@@ -43,6 +43,10 @@
   }
 }
 
+body {
+  background-color: rgb(8, 10, 14);
+}
+
 .hero {
   min-height: calc(100vh - 100px);
   background-color: rgb(8, 10, 14);
