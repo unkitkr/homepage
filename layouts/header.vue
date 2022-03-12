@@ -10,15 +10,10 @@
         <div>
           <b-dropdown id="dropdown-right" right class="m-md-2 btn-toggl" variant="transparent" no-caret>
             <template #button-content><b-icon-caret-down-fill class="btn-menu"> </b-icon-caret-down-fill></template>
-            <b-dropdown-item
-              ><a :href="socials.twitter"><b-icon-twitter></b-icon-twitter></a
-            ></b-dropdown-item>
-            <b-dropdown-item
-              ><a :href="socials.linkedin"><b-icon-linkedin></b-icon-linkedin></a
-            ></b-dropdown-item>
-            <b-dropdown-item
-              ><a :href="socials.github"><b-icon-github></b-icon-github></a
-            ></b-dropdown-item>
+
+            <b-dropdown-item :href="socials.twitter"><b-icon-twitter></b-icon-twitter></b-dropdown-item>
+            <b-dropdown-item :href="socials.linkedin"><b-icon-linkedin></b-icon-linkedin></b-dropdown-item>
+            <b-dropdown-item :href="socials.github"><b-icon-github></b-icon-github></b-dropdown-item>
             <b-dropdown-divider></b-dropdown-divider>
             <b-dropdown-item><b-icon-info-circle-fill></b-icon-info-circle-fill></b-dropdown-item>
             <b-dropdown-item><b-icon-text-paragraph></b-icon-text-paragraph></b-dropdown-item>

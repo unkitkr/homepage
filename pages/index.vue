@@ -3,22 +3,22 @@
     <section class="hero">
       <b-container>
         <b-row>
-          <b-col>
+          <b-col md="8">
             <div class="intro-text">Hi.</div>
             <div class="content-text">
               <p>I am Ankit, a computer science graduate with a keen interest on product and design.</p>
               <p>Currently I'm working at <a href="https://www.swapcard.com" style="color: #00d395">Swapcard</a> as a Backend Engineer in the Customer Integration Squad.</p>
-              <p>Previously I've worked at <a href="https://www.surveysparrow.com" style="color: #00d395">Surveysparrow</a> as a Product Engineer Intern in their Web performance Engineering team.</p>
-            </div>
-            <div class="content-sub-text">
-              <p>This is a work in progress, please consider visiting after next weekend, probably I'll have blogs and a bit more about me 😄</p>
+              <p>Previously I've worked at <a href="https://www.surveysparrow.com" style="color: #00d395">Surveysparrow</a> as a Product Engineer Intern in their web performance engineering team.</p>
             </div>
             <div class="content-text-links" style="margin-top: 2rem">
               <p>
-                <a :href="socials.twitter"><b-icon-twitter></b-icon-twitter> twitter</a> &nbsp;&nbsp; <a :href="socials.linkedin"><b-icon-linkedin></b-icon-linkedin> linkedin</a> &nbsp;&nbsp; <a :href="socials.github"><b-icon-github></b-icon-github> github</a> &nbsp;&nbsp; <b-icon-text-paragraph></b-icon-text-paragraph> blogs
+                <a :href="socials.twitter"><b-icon-twitter></b-icon-twitter> twitter</a>
+                &nbsp;&nbsp; <a :href="socials.linkedin"><b-icon-linkedin></b-icon-linkedin> linkedin</a> &nbsp;&nbsp; <a :href="socials.github"><b-icon-github></b-icon-github> github</a> &nbsp;&nbsp;
+                <NuxtLink to="/blogs"><b-icon-text-paragraph></b-icon-text-paragraph> writings </NuxtLink>
               </p>
             </div>
           </b-col>
+          <b-col md="4"> </b-col>
         </b-row>
       </b-container>
     </section>
@@ -98,7 +98,7 @@ export default {
   background-size: contain;
 }
 .intro-text {
-  font-size: 4rem;
+  font-size: 3.5rem;
   margin-top: 8rem;
   color: rgb(255, 255, 255);
   font-weight: 700;
@@ -109,13 +109,14 @@ export default {
 .content-text {
   margin-top: 1rem;
   color: rgb(255, 255, 255);
-  font-size: 1.5rem;
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 300;
   font-family: "Open sans";
   margin-left: 5px;
 }
 .content-text-links {
-  margin-top: 2rem;
+  border-top: solid 1px rgb(32, 32, 32);
+  padding-top: 1rem;
   color: rgb(255, 255, 255);
   font-size: 1rem;
   font-weight: 400;
