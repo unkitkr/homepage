@@ -28,6 +28,7 @@ const handler = async (event, context) => {
     }
     const endpointSplit = event.path.split("/");
     const endpoint = endpointSplit[endpointSplit.length - 1];
+    console.log(environmentVariables);
     switch (endpoint) {
         case "ping": {
             return {
