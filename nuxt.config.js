@@ -1,5 +1,6 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+
   head: {
     title: "unkitkr",
     htmlAttrs: {
@@ -23,6 +24,7 @@ export default {
     // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build",
     "@nuxtjs/google-fonts",
+    "@nuxtjs/dotenv",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -34,16 +36,33 @@ export default {
     // https://go.nuxtjs.dev/content
     "@nuxt/content",
   ],
-
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: "/",
   },
-
+  target: "static",
   // Content module configuration: https://go.nuxtjs.dev/config-content
-  content: {},
-
+  content: {
+    editor: "~/.nuxt/content/editor.vue",
+    apiPrefix: "_content",
+    dir: "content",
+    fullTextSearchFields: ["title", "description", "slug", "text"],
+    nestedProperties: [],
+    liveEdit: true,
+    useCache: false,
+    markdown: {
+      remarkPlugins: ["remark-squeeze-paragraphs", "remark-slug", "remark-autolink-headings", "remark-external-links", "remark-footnotes"],
+      rehypePlugins: ["rehype-sort-attribute-values", "rehype-sort-attributes", "rehype-raw"],
+      prism: {
+        theme: "~assets/prisma-custom.css",
+      },
+    },
+    yaml: {},
+    csv: {},
+    xml: {},
+    extendParser: {},
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   googleFonts: {
@@ -54,5 +73,8 @@ export default {
       Raleway: [100, 300, 400, 500, 600, 700, 800],
       "Open+Sans": [100, 300, 400, 500, 600, 700, 800],
     },
+  },
+  server: {
+    port: 3000, // default: 3000
   },
 };

@@ -1,0 +1,14 @@
+[dev]
+  functions = "app"
+
+[build]
+  functions = "app"
+
+[functions]
+  directory = "app"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "api.unkitkr.xyz"
+  to = "unkitkr.xyz/.netlify/functions"
+  status = 200
