@@ -178,11 +178,11 @@ a {
 </style>
 <script >
 const ldash = require("lodash");
-require("dotenv").config();
 import { BIconArrowUpRightCircleFill } from "bootstrap-vue";
 export default {
   methods: {
     async getStatuses() {
+      console.log(process.env);
       const responseStatuses = await fetch(`${process.env.API_BASE_URL}/get/status`, {
         headers: {
           "x-api-key": process.env.API_KEY_GET,
