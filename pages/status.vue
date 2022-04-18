@@ -191,7 +191,7 @@ export default {
       });
       const responseAvail = await fetch(`${process.env.API_BASE_URL}/get/available`, {
         headers: {
-          "x-api-key": "abc",
+          "x-api-key": process.env.API_KEY_GET,
         },
         method: "get",
       });
