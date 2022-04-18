@@ -24,6 +24,7 @@ export default {
     // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build",
     "@nuxtjs/google-fonts",
+    "@nuxtjs/dotenv",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

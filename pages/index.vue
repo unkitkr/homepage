@@ -6,11 +6,15 @@
           <b-col md="8">
             <div class="intro-text">Hi.</div>
             <div class="content-text">
-              <p>I am Ankit, a computer science graduate with a keen interest on product and design.</p>
-              <p>Currently I'm working at <a href="https://www.swapcard.com" style="color: #00d395">Swapcard</a> as a Backend Engineer in the Customer Integration Squad.</p>
-              <p>Previously I've worked at <a href="https://www.surveysparrow.com" style="color: #00d395">Surveysparrow</a> as a Product Engineer Intern in their web performance engineering team.</p>
+              <p>I am Ankit, a computer science graduate with a keen interest in product and design.</p>
+              <p>Currently, I'm working at <a href="https://www.swapcard.com" style="color: #00d395">Swapcard</a> as a Backend Engineer in the Customer Integration Squad.</p>
+              <p>Previously, I've worked at <a href="https://www.surveysparrow.com" style="color: #00d395">Surveysparrow</a> as a Product Engineer Intern in their web performance engineering team.</p>
+              <p>Outside work I often do some random <a href="#" style="color: #00d395">experiments</a> on weekends.</p>
             </div>
-            <div class="content-text-links" style="margin-top: 2rem">
+            <div class="status-text" style="margin-top: 2rem">
+              <p>My current status updates [rants.] are <nuxt-link to="/status" style="color: #00d395"> here. </nuxt-link></p>
+            </div>
+            <div class="content-text-links">
               <p>
                 <a :href="socials.twitter"><b-icon-twitter></b-icon-twitter> twitter</a>
                 &nbsp;&nbsp; <a :href="socials.linkedin"><b-icon-linkedin></b-icon-linkedin> linkedin</a> &nbsp;&nbsp; <a :href="socials.github"><b-icon-github></b-icon-github> github</a> &nbsp;&nbsp;
@@ -124,6 +128,17 @@ body {
   font-weight: 400;
   font-family: "Open sans";
   margin-left: 5px;
+}
+.status-text {
+  border-top: solid 1px rgb(32, 32, 32);
+  padding-top: 1rem;
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: "Open sans";
+  margin-left: 5px;
+  margin-bottom: 0px !important;
+  padding-bottom: 0px !important;
 }
 .content-sub-text {
   margin-top: 2rem;

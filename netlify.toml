@@ -1,6 +1,9 @@
 [dev]
   functions = "app"
-  functionsPort = 7000
+
+[build]
+  functions = "app"
 
 [functions]
   directory = "app"
+  node_bundler = "tsc"
