@@ -77,7 +77,7 @@ export default {
   server: {
     port: 3000, // default: 3000
   },
-  privateRuntimeConfig: {
+  publicRuntimeConfig: {
     apiKey: process.env.API_KEY_GET,
     baseURL: process.env.API_BASE_URL,
   },
