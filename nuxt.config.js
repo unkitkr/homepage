@@ -24,7 +24,7 @@ export default {
     // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build",
     "@nuxtjs/google-fonts",
-    "@nuxtjs/dotenv",
+    ["@nuxtjs/dotenv", {}],
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -76,5 +76,9 @@ export default {
   },
   server: {
     port: 3000, // default: 3000
+  },
+  privateRuntimeConfig: {
+    apiKey: process.env.API_KEY_GET,
+    baseURL: process.env.API_BASE_URL,
   },
 };
