@@ -9,6 +9,6 @@
   node_bundler = "esbuild"
 
 [[redirects]]
-  from = "unkitkr.xyz/.netlify/functions"
-  to = "unkitkr.xyz/api"
+  from = "unkitkr.xyz/.netlify/functions/*"
+  to = "unkitkr.xyz/api/:splat"
   status = 200
