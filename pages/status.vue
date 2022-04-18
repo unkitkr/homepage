@@ -178,6 +178,7 @@ a {
 </style>
 <script >
 const ldash = require("lodash");
+require("dotenv").config();
 import { BIconArrowUpRightCircleFill } from "bootstrap-vue";
 export default {
   methods: {
