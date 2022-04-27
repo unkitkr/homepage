@@ -182,7 +182,11 @@ import { BIconArrowUpRightCircleFill } from "bootstrap-vue";
 export default {
   methods: {
     async getStatuses() {
+<<<<<<< HEAD
       console.log(process.env);
+=======
+      console.log(process.env.API_BASE_URL);
+>>>>>>> c64b14e (Test with logger)
       const responseStatuses = await fetch(`${process.env.API_BASE_URL}/get/status`, {
         headers: {
           "x-api-key": process.env.API_KEY_GET,
