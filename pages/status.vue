@@ -181,17 +181,17 @@ const ldash = require("lodash");
 import { BIconArrowUpRightCircleFill } from "bootstrap-vue";
 export default {
   methods: {
-    async getStatuses({ $config: { baseURL, apiKey } }) {
-      console.log(process.env);
-      const responseStatuses = await fetch(`${baseURL}/get/status`, {
+    async getStatuses() {
+      console.log(process.env.API_KEY_GET);
+      const responseStatuses = await fetch(`${process.env.API_BASE_URL}/get/status`, {
         headers: {
-          "x-api-key": apiKey,
+          "x-api-key": process.env.API_KEY_GET,
         },
         method: "get",
       });
-      const responseAvail = await fetch(`${baseURL}/get/available`, {
+      const responseAvail = await fetch(`${process.env.API_BASE_URL}/get/available`, {
         headers: {
-          "x-api-key": apiKey,
+          "x-api-key": process.env.API_KEY_GET,
         },
         method: "get",
       });
