@@ -17,7 +17,7 @@
               </div>
             </div>
             <div class="subscribe-holder">
-              <a href="https" target="_blank"
+              <a href="https://t.me/logl_bot?start=start" target="_blank"
                 ><span class="subscribe-text"><b-icon-arrow-up-right-circle-fill style="color: #00d395"></b-icon-arrow-up-right-circle-fill> subscribe</span> <span class="subscribe-sub-text">no spam. promise.</span></a
               >
             </div>
