@@ -19,7 +19,7 @@ const handler: Handler = async (event, context) => {
       body: "Method not allowed",
     };
   }
-  if (!("x-api-key" in event.headers) || event.headers["x-api-key"] !== environmentVariables.API_KEY_GET!) {
+  if (!("x-api-key" in event.headers) || event.headers["x-api-key"] !== environmentVariables.NUXT_ENV_API_KEY_GET!) {
     return {
       statusCode: 401,
       body: "Not authorized",
