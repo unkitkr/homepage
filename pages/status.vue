@@ -179,10 +179,11 @@ a {
 <script >
 const ldash = require("lodash");
 import { BIconArrowUpRightCircleFill } from "bootstrap-vue";
+console.log(process.env);
 export default {
   methods: {
     async getStatuses() {
-      console.log(process.env.NUXT_ENV_API_BASE_URL);
+      console.log(process.env);
       const responseStatuses = await fetch(`${process.env.NUXT_ENV_API_BASE_URL}/get/status`, {
         headers: {
           "x-api-key": process.env.NUXT_ENV_API_KEY_GET,
