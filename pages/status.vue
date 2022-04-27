@@ -210,7 +210,6 @@ export default {
     },
 
     getCurrentStatusAndColor(status) {
-      status = "onem";
       const equivalenceTable = new Map([
         ["avl", ["available", "#00d395"]],
         ["lavl", ["limited availability", "rgb(255, 188, 134)"]],
