@@ -31,6 +31,7 @@ class commandProcessor {
         this.availableDb = this.db.table(environmentVariables.API_KEY_AVAILABLE_DB);
         this.newStatus = async () => {
             const messageRecieved = this.parsedMessage.message.split(" ");
+            console.log(messageRecieved);
             if (messageRecieved && messageRecieved.length !== 2) {
                 this.sendMessage("sendMessage", {
                     text: `The format to send new status is : category1,cattegory2.. <space> status`,
