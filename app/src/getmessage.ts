@@ -85,7 +85,6 @@ class commandProcessor {
 
   private newStatus = async () => {
     const messageRecieved = this.parsedMessage.message.split(" ");
-    console.log(messageRecieved);
     if (messageRecieved && messageRecieved.length !== 2) {
       this.sendMessage("sendMessage", {
         text: `The format to send new status is : category1,cattegory2.. <space> status`,
@@ -364,6 +363,7 @@ const handler: Handler = async (event, context) => {
     };
   }
   console.log(event.body);
+  console.log(process.env);
   const recievedDetails = bodyParser(event.body!);
   const parsedMessage = messageParser(recievedDetails.rawMessage);
   if (parsedMessage) {
