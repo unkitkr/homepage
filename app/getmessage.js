@@ -18,6 +18,7 @@ class commandProcessor {
             console.log(action, params);
             const paramString = qs_1.default.stringify(params);
             const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
+            console.log(urlEndpoint);
             const res = await node_fetch_1.default(urlEndpoint, {
                 method: "GET",
             });
