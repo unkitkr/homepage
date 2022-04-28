@@ -96,27 +96,31 @@ class commandProcessor {
 
     const cat = messageRecieved[0].split(",");
     const msg = messageRecieved[1];
-    const status = await this.statusDb.create(
-      [
-        {
-          fields: {
-            status: msg,
-            category: cat,
+    try {
+      const status = await this.statusDb.create(
+        [
+          {
+            fields: {
+              status: msg,
+              category: cat,
+            },
           },
-        },
-      ],
-      {
-        typecast: true,
+        ],
+        {
+          typecast: true,
+        }
+      );
+
+      const id = status[0].getId();
+      if (status.length && status.length > 0) {
+        this.sendMessage("sendMessage", {
+          text: `status sent with id ${id}`,
+          reply_to_message_id: this.processedData.messageId,
+          chat_id: this.processedData.chatId,
+        });
       }
-    );
-    const id = status[0].getId();
-    console.log(id);
-    if (status.length && status.length > 0) {
-      this.sendMessage("sendMessage", {
-        text: `status sent with id ${id}`,
-        reply_to_message_id: this.processedData.messageId,
-        chat_id: this.processedData.chatId,
-      });
+    } catch (e) {
+      console.log(e);
     }
   };
   private deletestatus = async () => {
