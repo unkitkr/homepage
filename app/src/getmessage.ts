@@ -66,6 +66,7 @@ class commandProcessor {
 
   //keep action as a parameter to have felxibility of the function later
   private sendMessage = async (action: string, params: { [key: string]: string }) => {
+    console.log(action, params);
     const paramString = qs.stringify(params);
     const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
     const res = await fetch(urlEndpoint, {
@@ -86,6 +87,7 @@ class commandProcessor {
   private newStatus = async () => {
     const messageRecieved = this.parsedMessage.message.split(" ");
     if (messageRecieved && messageRecieved.length !== 2) {
+      console.log("err");
       this.sendMessage("sendMessage", {
         text: `The format to send new status is : category1,cattegory2.. <space> status`,
         reply_to_message_id: this.processedData.messageId,
