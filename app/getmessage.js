@@ -22,8 +22,10 @@ class commandProcessor {
                 method: "GET",
             });
             try {
-                const res2 = await axios_1.default.get(urlEndpoint);
-                console.log(res2);
+                axios_1.default
+                    .get(urlEndpoint)
+                    .then((da) => console.log(da))
+                    .catch((err) => console.log(err));
             }
             catch (e) {
                 console.log(e);
