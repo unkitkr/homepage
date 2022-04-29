@@ -4,7 +4,7 @@ import airtable from "airtable";
 import qs from "qs";
 import { capitalize } from "lodash";
 import "dotenv/config";
-import https from "https";
+import axios from "axios";
 
 const environmentVariables = process.env;
 
@@ -70,25 +70,15 @@ class commandProcessor {
     const paramString = qs.stringify(params);
     const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
     try {
-      https
-        .get(urlEndpoint, (resp) => {
-          let data = "";
-
-          // A chunk of data has been received.
-          resp.on("data", (chunk) => {
-            data += chunk;
-          });
-
-          console.log(data);
-
-          // The whole response has been received. Print out the result.
-          resp.on("end", () => {
-            console.log(JSON.parse(data).explanation);
-          });
+      axios
+        .get(urlEndpoint)
+        .then((json) => {
+          return {
+            statusCode: 200,
+            body: JSON.stringify(json.data),
+          };
         })
-        .on("error", (err) => {
-          console.log("Error: " + err.message);
-        });
+        .catch((ex) => console.log(ex));
     } catch (e) {
       console.log(e);
     }
