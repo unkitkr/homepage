@@ -9,7 +9,7 @@ const airtable_1 = __importDefault(require("airtable"));
 const qs_1 = __importDefault(require("qs"));
 const lodash_1 = require("lodash");
 require("dotenv/config");
-const axios_1 = __importDefault(require("axios"));
+const https_1 = __importDefault(require("https"));
 const environmentVariables = process.env;
 class commandProcessor {
     constructor({ parsedMessage, rawData }) {
@@ -22,10 +22,22 @@ class commandProcessor {
                 method: "GET",
             });
             try {
-                axios_1.default
-                    .get(urlEndpoint)
-                    .then((da) => console.log(da))
-                    .catch((err) => console.log(err));
+                https_1.default
+                    .get(urlEndpoint, (resp) => {
+                    let data = "";
+                    // A chunk of data has been received.
+                    resp.on("data", (chunk) => {
+                        data += chunk;
+                    });
+                    console.log(data);
+                    // The whole response has been received. Print out the result.
+                    resp.on("end", () => {
+                        console.log(JSON.parse(data).explanation);
+                    });
+                })
+                    .on("error", (err) => {
+                    console.log("Error: " + err.message);
+                });
                 node_fetch_1.default(urlEndpoint)
                     .then((dt) => console.log(dt))
                     .catch((e) => console.log(e));

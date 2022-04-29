@@ -4,7 +4,7 @@ import airtable from "airtable";
 import qs from "qs";
 import { capitalize } from "lodash";
 import "dotenv/config";
-import axios from "axios";
+import https from "https";
 
 const environmentVariables = process.env;
 
@@ -73,10 +73,25 @@ class commandProcessor {
       method: "GET",
     });
     try {
-      axios
-        .get(urlEndpoint)
-        .then((da) => console.log(da))
-        .catch((err) => console.log(err));
+      https
+        .get(urlEndpoint, (resp) => {
+          let data = "";
+
+          // A chunk of data has been received.
+          resp.on("data", (chunk) => {
+            data += chunk;
+          });
+
+          console.log(data);
+
+          // The whole response has been received. Print out the result.
+          resp.on("end", () => {
+            console.log(JSON.parse(data).explanation);
+          });
+        })
+        .on("error", (err) => {
+          console.log("Error: " + err.message);
+        });
 
       fetch(urlEndpoint)
         .then((dt) => console.log(dt))
