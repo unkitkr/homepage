@@ -9,18 +9,20 @@ const airtable_1 = __importDefault(require("airtable"));
 const qs_1 = __importDefault(require("qs"));
 const lodash_1 = require("lodash");
 require("dotenv/config");
+const axios_1 = __importDefault(require("axios"));
 const environmentVariables = process.env;
 class commandProcessor {
     constructor({ parsedMessage, rawData }) {
         this.isAuthencated = false;
         //keep action as a parameter to have felxibility of the function later
         this.sendMessage = async (action, params) => {
-            console.log(action, params);
             const paramString = qs_1.default.stringify(params);
             const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
             const res = await node_fetch_1.default(urlEndpoint, {
                 method: "GET",
             });
+            const res2 = axios_1.default.get(urlEndpoint);
+            console.log(res2);
             console.log(urlEndpoint, res);
         };
         this.db = new airtable_1.default({

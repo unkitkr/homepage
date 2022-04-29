@@ -4,6 +4,7 @@ import airtable from "airtable";
 import qs from "qs";
 import { capitalize } from "lodash";
 import "dotenv/config";
+import axios from "axios";
 
 const environmentVariables = process.env;
 
@@ -66,12 +67,13 @@ class commandProcessor {
 
   //keep action as a parameter to have felxibility of the function later
   private sendMessage = async (action: string, params: { [key: string]: string }) => {
-    console.log(action, params);
     const paramString = qs.stringify(params);
     const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
     const res = await fetch(urlEndpoint, {
       method: "GET",
     });
+    const res2 = axios.get(urlEndpoint);
+    console.log(res2);
     console.log(urlEndpoint, res);
   };
 
