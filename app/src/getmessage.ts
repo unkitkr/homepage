@@ -69,9 +69,6 @@ class commandProcessor {
   private sendMessage = async (action: string, params: { [key: string]: string }) => {
     const paramString = qs.stringify(params);
     const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
-    const res = await fetch(urlEndpoint, {
-      method: "GET",
-    });
     try {
       https
         .get(urlEndpoint, (resp) => {
@@ -92,14 +89,10 @@ class commandProcessor {
         .on("error", (err) => {
           console.log("Error: " + err.message);
         });
-
-      fetch(urlEndpoint)
-        .then((dt) => console.log(dt))
-        .catch((e) => console.log(e));
     } catch (e) {
       console.log(e);
     }
-    console.log(urlEndpoint, res);
+    console.log(urlEndpoint);
   };
 
   private db = new airtable({

@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
-const node_fetch_1 = __importDefault(require("node-fetch"));
 const airtable_1 = __importDefault(require("airtable"));
 const qs_1 = __importDefault(require("qs"));
 const lodash_1 = require("lodash");
@@ -18,9 +17,6 @@ class commandProcessor {
         this.sendMessage = async (action, params) => {
             const paramString = qs_1.default.stringify(params);
             const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
-            const res = await node_fetch_1.default(urlEndpoint, {
-                method: "GET",
-            });
             try {
                 https_1.default
                     .get(urlEndpoint, (resp) => {
@@ -38,14 +34,11 @@ class commandProcessor {
                     .on("error", (err) => {
                     console.log("Error: " + err.message);
                 });
-                node_fetch_1.default(urlEndpoint)
-                    .then((dt) => console.log(dt))
-                    .catch((e) => console.log(e));
             }
             catch (e) {
                 console.log(e);
             }
-            console.log(urlEndpoint, res);
+            console.log(urlEndpoint);
         };
         this.db = new airtable_1.default({
             apiKey: environmentVariables.API_KEY_AIRTABLE,
