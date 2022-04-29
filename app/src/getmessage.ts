@@ -77,6 +77,10 @@ class commandProcessor {
         .get(urlEndpoint)
         .then((da) => console.log(da))
         .catch((err) => console.log(err));
+
+      fetch(urlEndpoint)
+        .then((dt) => console.log(dt))
+        .catch((e) => console.log(e));
     } catch (e) {
       console.log(e);
     }
