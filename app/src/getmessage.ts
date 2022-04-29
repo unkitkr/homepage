@@ -72,8 +72,12 @@ class commandProcessor {
     const res = await fetch(urlEndpoint, {
       method: "GET",
     });
-    const res2 = axios.get(urlEndpoint);
-    console.log(res2);
+    try {
+      const res2 = await axios.get(urlEndpoint);
+      console.log(res2);
+    } catch (e) {
+      console.log(e);
+    }
     console.log(urlEndpoint, res);
   };
 
