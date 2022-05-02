@@ -17,17 +17,15 @@ class commandProcessor {
         this.sendMessage = async (action, params) => {
             const paramString = qs_1.default.stringify(params);
             const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
-            const k = node_fetch_1.default(urlEndpoint)
-                .then((response) => {
-                console.log(response.json());
-                return response.json();
-            })
-                .then((data) => {
-                return data;
-            })
+            return node_fetch_1.default(urlEndpoint, { headers: { Accept: "application/json" } })
+                .then((response) => response.json())
+                .then((data) => ({
+                statusCode: 200,
+                body: data.joke,
+            }))
                 .catch((error) => ({ statusCode: 422, body: String(error) }));
-            console.log(`${k} f inside fetch`);
-            console.log(urlEndpoint);
+            // console.log(`${k} f inside fetch`);
+            // console.log(urlEndpoint);
         };
         this.db = new airtable_1.default({
             apiKey: environmentVariables.API_KEY_AIRTABLE,
