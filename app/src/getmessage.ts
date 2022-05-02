@@ -73,6 +73,11 @@ class commandProcessor {
       const response = await fetch(urlEndpoint);
       const data = await response.json();
       console.log(data, response);
+      this.callback("null", {
+        statusCode: 200,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
     } catch (exc) {
       console.log(`send message exception ${exc}`);
     }
@@ -317,11 +322,6 @@ class commandProcessor {
     if (authRequired) {
       if (this.isAuthencated) {
         const res = await runner();
-        this.callback("null", {
-          statusCode: 200,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(res),
-        });
         return res;
       } else {
         return 401;
