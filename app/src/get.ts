@@ -29,10 +29,13 @@ const handler: Handler = async (event, context) => {
   const endpoint = endpointSplit[endpointSplit.length - 1];
   switch (endpoint) {
     case "ping": {
-      return {
-        statusCode: 200,
-        body: "OK",
-      };
+      return fetch("https://icanhazdadjoke.com/", { headers: { Accept: "application/json" } })
+        .then((response) => response.json())
+        .then((data) => ({
+          statusCode: 200,
+          body: data.joke,
+        }))
+        .catch((error) => ({ statusCode: 422, body: String(error) }));
     }
     case "status": {
       const statuses: FieldSet[] = [];
