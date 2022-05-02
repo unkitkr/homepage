@@ -21,6 +21,7 @@ class commandProcessor {
             try {
                 const response = await node_fetch_1.default(urlEndpoint);
                 const data = await response.json();
+                console.log(data, response);
                 this.callback("null", {
                     statusCode: 200,
                     headers: { "Content-Type": "application/json" },
@@ -65,6 +66,11 @@ class commandProcessor {
                     typecast: true,
                 });
                 console.log(status);
+                this.callback("null", {
+                    statusCode: 200,
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(status),
+                });
                 const id = status[0].getId();
                 if (status.length && status.length > 0) {
                     await this.sendMessage("sendMessage", {

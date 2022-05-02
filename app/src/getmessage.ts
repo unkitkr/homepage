@@ -124,6 +124,11 @@ class commandProcessor {
         }
       );
       console.log(status);
+      this.callback("null", {
+        statusCode: 200,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(status),
+      });
       const id = status[0].getId();
       if (status.length && status.length > 0) {
         await this.sendMessage("sendMessage", {
