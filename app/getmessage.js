@@ -18,9 +18,11 @@ class commandProcessor {
             const paramString = qs_1.default.stringify(params);
             const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
             try {
-                return node_fetch_1.default(urlEndpoint)
+                node_fetch_1.default(urlEndpoint)
                     .then((response) => response.json())
-                    .then((data) => console.log(data))
+                    .then((data) => {
+                    return data;
+                })
                     .catch((error) => ({ statusCode: 422, body: String(error) }));
             }
             catch (e) {
