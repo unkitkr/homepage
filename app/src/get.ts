@@ -1,7 +1,7 @@
 import { Handler } from "@netlify/functions";
 import airtable, { FieldSet, Record } from "airtable";
 import "dotenv/config";
-
+import fetch from "node-fetch";
 const environmentVariables = process.env;
 
 const db = new airtable({

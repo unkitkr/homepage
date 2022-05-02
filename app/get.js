@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
 const airtable_1 = __importDefault(require("airtable"));
 require("dotenv/config");
+const node_fetch_1 = __importDefault(require("node-fetch"));
 const environmentVariables = process.env;
 const db = new airtable_1.default({
     apiKey: environmentVariables.API_KEY_AIRTABLE,
@@ -30,7 +31,7 @@ const handler = async (event, context) => {
     const endpoint = endpointSplit[endpointSplit.length - 1];
     switch (endpoint) {
         case "ping": {
-            return fetch("https://icanhazdadjoke.com/", { headers: { Accept: "application/json" } })
+            return node_fetch_1.default("https://icanhazdadjoke.com/", { headers: { Accept: "application/json" } })
                 .then((response) => response.json())
                 .then((data) => ({
                 statusCode: 200,
