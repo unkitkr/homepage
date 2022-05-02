@@ -69,7 +69,7 @@ class commandProcessor {
     const paramString = qs.stringify(params);
     const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
     try {
-      fetch(urlEndpoint)
+      await fetch(urlEndpoint)
         .then((response) => response.json())
         .then((data) => {
           return data;
@@ -370,8 +370,6 @@ const handler: Handler = async (event, context) => {
       body: "Method not allowed",
     };
   }
-  console.log(event.body);
-  console.log(process.env);
   const recievedDetails = bodyParser(event.body!);
   const parsedMessage = messageParser(recievedDetails.rawMessage);
   if (parsedMessage) {
