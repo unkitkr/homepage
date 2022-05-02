@@ -22,11 +22,6 @@ class commandProcessor {
                 const response = await node_fetch_1.default(urlEndpoint);
                 const data = await response.json();
                 console.log(data, response);
-                this.callback("null", {
-                    statusCode: 200,
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data),
-                });
             }
             catch (exc) {
                 console.log(`send message exception ${exc}`);
@@ -66,11 +61,6 @@ class commandProcessor {
                     typecast: true,
                 });
                 console.log(status);
-                // this.callback("null", {
-                //   statusCode: 200,
-                //   headers: { "Content-Type": "application/json" },
-                //   body: JSON.stringify(status),
-                // });
                 const id = status[0].getId();
                 if (status.length && status.length > 0) {
                     await this.sendMessage("sendMessage", {
@@ -264,6 +254,11 @@ class commandProcessor {
             if (authRequired) {
                 if (this.isAuthencated) {
                     const res = await runner();
+                    this.callback("null", {
+                        statusCode: 200,
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(res),
+                    });
                     return res;
                 }
                 else {
@@ -272,11 +267,20 @@ class commandProcessor {
             }
             else {
                 const res = await runner();
+                this.callback("null", {
+                    statusCode: 200,
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(res),
+                });
                 return res;
             }
         };
         this.process = () => {
-            this.messageDispatcher().then((data) => console.log(`this is frm command runner ${data}`));
+            this.messageDispatcher().then((data) => this.callback("null", {
+                statusCode: 200,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            }));
         };
         this.parsedMessage = parsedMessage;
         this.processedData = rawData;

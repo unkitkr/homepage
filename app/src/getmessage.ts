@@ -73,11 +73,6 @@ class commandProcessor {
       const response = await fetch(urlEndpoint);
       const data = await response.json();
       console.log(data, response);
-      this.callback("null", {
-        statusCode: 200,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
     } catch (exc) {
       console.log(`send message exception ${exc}`);
     }
@@ -124,11 +119,6 @@ class commandProcessor {
         }
       );
       console.log(status);
-      // this.callback("null", {
-      //   statusCode: 200,
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(status),
-      // });
       const id = status[0].getId();
       if (status.length && status.length > 0) {
         await this.sendMessage("sendMessage", {
@@ -327,18 +317,34 @@ class commandProcessor {
     if (authRequired) {
       if (this.isAuthencated) {
         const res = await runner();
+        this.callback("null", {
+          statusCode: 200,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(res),
+        });
         return res;
       } else {
         return 401;
       }
     } else {
       const res = await runner();
+      this.callback("null", {
+        statusCode: 200,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(res),
+      });
       return res;
     }
   };
 
   public process = () => {
-    this.messageDispatcher().then((data) => console.log(`this is frm command runner ${data}`));
+    this.messageDispatcher().then((data) =>
+      this.callback("null", {
+        statusCode: 200,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+    );
   };
 }
 
