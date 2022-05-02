@@ -17,12 +17,13 @@ class commandProcessor {
         this.sendMessage = async (action, params) => {
             const paramString = qs_1.default.stringify(params);
             const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
-            node_fetch_1.default(urlEndpoint)
+            const k = node_fetch_1.default(urlEndpoint)
                 .then((response) => response.json())
                 .then((data) => {
                 return data;
             })
                 .catch((error) => ({ statusCode: 422, body: String(error) }));
+            console.log(`${k} f inside fetch`);
             console.log(urlEndpoint);
         };
         this.db = new airtable_1.default({
