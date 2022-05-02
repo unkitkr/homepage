@@ -68,7 +68,7 @@ class commandProcessor {
   private sendMessage = async (action: string, params: { [key: string]: string }) => {
     const paramString = qs.stringify(params);
     const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
-    return fetch(urlEndpoint, { headers: { Accept: "application/json" } })
+    return fetch(urlEndpoint)
       .then((response) => response.json())
       .then((data) => ({
         statusCode: 200,
