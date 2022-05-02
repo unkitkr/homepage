@@ -72,6 +72,7 @@ class commandProcessor {
     try {
       const response = await fetch(urlEndpoint);
       const data = await response.json();
+      console.log(data, response);
       this.callback("null", {
         statusCode: 200,
         headers: { "Content-Type": "application/json" },
