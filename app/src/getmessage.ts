@@ -1,4 +1,4 @@
-import { Handler, HandlerCallback } from "@netlify/functions";
+import { Handler } from "@netlify/functions";
 import fetch from "node-fetch";
 import airtable from "airtable";
 import qs from "qs";
@@ -63,27 +63,19 @@ class commandProcessor {
   private parsedMessage: IParsedMessage;
   private isAuthencated: boolean = false;
   private processedData: IProcessedPayload;
-  private callback: HandlerCallback = {} as HandlerCallback;
 
   //keep action as a parameter to have felxibility of the function later
   private sendMessage = async (action: string, params: { [key: string]: string }) => {
+    console.log(action, params);
     const paramString = qs.stringify(params);
     const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
-    try {
-      const response = await fetch(urlEndpoint);
-      const data = await response.json();
-      console.log(data, response);
-      this.callback("null", {
-        statusCode: 200,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-    } catch (exc) {
-      console.log(`send message exception ${exc}`);
-    }
-
-    // console.log(`${k} f inside fetch`);
-    // console.log(urlEndpoint);
+    const res = await fetch(urlEndpoint, {
+      method: "GET",
+    });
+    console.log(urlEndpoint, res);
+    return {
+      statusCode: 200,
+    };
   };
 
   private db = new airtable({
@@ -99,12 +91,14 @@ class commandProcessor {
     const messageRecieved = this.parsedMessage.message.split(" ");
     if (messageRecieved && messageRecieved.length !== 2) {
       console.log("err");
-      this.sendMessage("sendMessage", {
+      await this.sendMessage("sendMessage", {
         text: `The format to send new status is : category1,cattegory2.. <space> status`,
         reply_to_message_id: this.processedData.messageId,
         chat_id: this.processedData.chatId,
       });
-      return;
+      return {
+        statusCode: 200,
+      };
     }
 
     const cat = messageRecieved[0].split(",");
@@ -131,6 +125,9 @@ class commandProcessor {
           reply_to_message_id: this.processedData.messageId,
           chat_id: this.processedData.chatId,
         });
+        return {
+          statusCode: 200,
+        };
       }
     } catch (e) {
       console.log(e);
@@ -280,7 +277,7 @@ class commandProcessor {
 
   private needsAuth = new Set(["/newstatus", "/deletestatus", "/updatestatus", "/available"]);
 
-  constructor({ parsedMessage, rawData, callback }: { parsedMessage: IParsedMessage; rawData: IProcessedPayload; callback: HandlerCallback }) {
+  constructor({ parsedMessage, rawData }: { parsedMessage: IParsedMessage; rawData: IProcessedPayload }) {
     this.parsedMessage = parsedMessage;
     this.processedData = rawData;
   }
@@ -368,7 +365,7 @@ const bodyParser = (obj: string) => {
   };
 };
 
-const handler: Handler = async (event, context, callback) => {
+const handler: Handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 400,
@@ -378,10 +375,8 @@ const handler: Handler = async (event, context, callback) => {
   const recievedDetails = bodyParser(event.body!);
   const parsedMessage = messageParser(recievedDetails.rawMessage);
   if (parsedMessage) {
-    if (callback) {
-      const processor = new commandProcessor({ parsedMessage, rawData: recievedDetails, callback });
-      processor.process();
-    }
+    const processor = new commandProcessor({ parsedMessage, rawData: recievedDetails });
+    processor.process();
   }
 
   return {
