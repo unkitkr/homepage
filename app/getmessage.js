@@ -18,7 +18,7 @@ class commandProcessor {
             const paramString = qs_1.default.stringify(params);
             const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
             try {
-                await node_fetch_1.default(urlEndpoint)
+                node_fetch_1.default(urlEndpoint)
                     .then((response) => response.json())
                     .then((data) => {
                     return data;
@@ -41,7 +41,7 @@ class commandProcessor {
             const messageRecieved = this.parsedMessage.message.split(" ");
             if (messageRecieved && messageRecieved.length !== 2) {
                 console.log("err");
-                await this.sendMessage("sendMessage", {
+                this.sendMessage("sendMessage", {
                     text: `The format to send new status is : category1,cattegory2.. <space> status`,
                     reply_to_message_id: this.processedData.messageId,
                     chat_id: this.processedData.chatId,
