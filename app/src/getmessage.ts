@@ -317,6 +317,11 @@ class commandProcessor {
     if (authRequired) {
       if (this.isAuthencated) {
         const res = await runner();
+        this.callback("null", {
+          statusCode: 200,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(res),
+        });
         return res;
       } else {
         return 401;
@@ -328,13 +333,7 @@ class commandProcessor {
   };
 
   public process = () => {
-    this.messageDispatcher().then((data) =>
-      this.callback("null", {
-        statusCode: 200,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      })
-    );
+    this.messageDispatcher().then((data) => console.log(data));
   };
 }
 
