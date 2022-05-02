@@ -4,11 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
+const node_fetch_1 = __importDefault(require("node-fetch"));
 const airtable_1 = __importDefault(require("airtable"));
 const qs_1 = __importDefault(require("qs"));
 const lodash_1 = require("lodash");
 require("dotenv/config");
-const axios_1 = __importDefault(require("axios"));
 const environmentVariables = process.env;
 class commandProcessor {
     constructor({ parsedMessage, rawData }) {
@@ -18,15 +18,10 @@ class commandProcessor {
             const paramString = qs_1.default.stringify(params);
             const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
             try {
-                axios_1.default
-                    .get(urlEndpoint)
-                    .then((json) => {
-                    return {
-                        statusCode: 200,
-                        body: JSON.stringify(json.data),
-                    };
-                })
-                    .catch((ex) => console.log(ex));
+                return node_fetch_1.default(urlEndpoint)
+                    .then((response) => response.json())
+                    .then((data) => console.log(data))
+                    .catch((error) => ({ statusCode: 422, body: String(error) }));
             }
             catch (e) {
                 console.log(e);

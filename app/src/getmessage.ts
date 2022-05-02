@@ -4,7 +4,6 @@ import airtable from "airtable";
 import qs from "qs";
 import { capitalize } from "lodash";
 import "dotenv/config";
-import axios from "axios";
 
 const environmentVariables = process.env;
 
@@ -70,15 +69,10 @@ class commandProcessor {
     const paramString = qs.stringify(params);
     const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
     try {
-      axios
-        .get(urlEndpoint)
-        .then((json) => {
-          return {
-            statusCode: 200,
-            body: JSON.stringify(json.data),
-          };
-        })
-        .catch((ex) => console.log(ex));
+      return fetch(urlEndpoint)
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => ({ statusCode: 422, body: String(error) }));
     } catch (e) {
       console.log(e);
     }

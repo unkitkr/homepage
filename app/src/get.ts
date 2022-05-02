@@ -1,7 +1,7 @@
 import { Handler } from "@netlify/functions";
 import airtable, { FieldSet, Record } from "airtable";
 import "dotenv/config";
-import fetch from "node-fetch";
+
 const environmentVariables = process.env;
 
 const db = new airtable({
@@ -27,15 +27,13 @@ const handler: Handler = async (event, context) => {
   }
   const endpointSplit = event.path.split("/");
   const endpoint = endpointSplit[endpointSplit.length - 1];
+
   switch (endpoint) {
     case "ping": {
-      return fetch("https://icanhazdadjoke.com/", { headers: { Accept: "application/json" } })
-        .then((response) => response.json())
-        .then((data) => ({
-          statusCode: 200,
-          body: data.joke,
-        }))
-        .catch((error) => ({ statusCode: 422, body: String(error) }));
+      return {
+        statusCode: 200,
+        body: "OK",
+      };
     }
     case "status": {
       const statuses: FieldSet[] = [];
