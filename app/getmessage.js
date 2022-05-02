@@ -18,13 +18,22 @@ class commandProcessor {
             console.log(action, params);
             const paramString = qs_1.default.stringify(params);
             const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
-            const res = await node_fetch_1.default(urlEndpoint, {
+            const res = node_fetch_1.default(urlEndpoint, {
                 method: "GET",
+            })
+                .then((logg) => {
+                return {
+                    statusCode: 200,
+                    body: logg,
+                };
+            })
+                .catch((err) => {
+                return {
+                    statusCode: 200,
+                    body: err,
+                };
             });
             console.log(urlEndpoint, res);
-            return {
-                statusCode: 200,
-            };
         };
         this.db = new airtable_1.default({
             apiKey: environmentVariables.API_KEY_AIRTABLE,
