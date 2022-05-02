@@ -1,4 +1,4 @@
-import { Handler } from "@netlify/functions";
+import { Handler, HandlerCallback } from "@netlify/functions";
 import fetch from "node-fetch";
 import airtable from "airtable";
 import qs from "qs";
@@ -63,18 +63,24 @@ class commandProcessor {
   private parsedMessage: IParsedMessage;
   private isAuthencated: boolean = false;
   private processedData: IProcessedPayload;
+  private callback: HandlerCallback = {} as HandlerCallback;
 
   //keep action as a parameter to have felxibility of the function later
   private sendMessage = async (action: string, params: { [key: string]: string }) => {
     const paramString = qs.stringify(params);
     const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
-    return fetch(urlEndpoint)
-      .then((response) => response.json())
-      .then((data) => ({
+    try {
+      const response = await fetch(urlEndpoint);
+      const data = await response.json();
+      this.callback("null", {
         statusCode: 200,
-        body: data.joke,
-      }))
-      .catch((error) => ({ statusCode: 422, body: String(error) }));
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+    } catch (exc) {
+      console.log(`send message exception ${exc}`);
+    }
+
     // console.log(`${k} f inside fetch`);
     // console.log(urlEndpoint);
   };
@@ -273,7 +279,7 @@ class commandProcessor {
 
   private needsAuth = new Set(["/newstatus", "/deletestatus", "/updatestatus", "/available"]);
 
-  constructor({ parsedMessage, rawData }: { parsedMessage: IParsedMessage; rawData: IProcessedPayload }) {
+  constructor({ parsedMessage, rawData, callback }: { parsedMessage: IParsedMessage; rawData: IProcessedPayload; callback: HandlerCallback }) {
     this.parsedMessage = parsedMessage;
     this.processedData = rawData;
   }
@@ -361,7 +367,7 @@ const bodyParser = (obj: string) => {
   };
 };
 
-const handler: Handler = async (event, context) => {
+const handler: Handler = async (event, context, callback) => {
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 400,
@@ -371,8 +377,10 @@ const handler: Handler = async (event, context) => {
   const recievedDetails = bodyParser(event.body!);
   const parsedMessage = messageParser(recievedDetails.rawMessage);
   if (parsedMessage) {
-    const processor = new commandProcessor({ parsedMessage, rawData: recievedDetails });
-    processor.process();
+    if (callback) {
+      const processor = new commandProcessor({ parsedMessage, rawData: recievedDetails, callback });
+      processor.process();
+    }
   }
 
   return {

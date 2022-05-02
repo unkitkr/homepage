@@ -11,19 +11,25 @@ const lodash_1 = require("lodash");
 require("dotenv/config");
 const environmentVariables = process.env;
 class commandProcessor {
-    constructor({ parsedMessage, rawData }) {
+    constructor({ parsedMessage, rawData, callback }) {
         this.isAuthencated = false;
+        this.callback = {};
         //keep action as a parameter to have felxibility of the function later
         this.sendMessage = async (action, params) => {
             const paramString = qs_1.default.stringify(params);
             const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
-            return node_fetch_1.default(urlEndpoint)
-                .then((response) => response.json())
-                .then((data) => ({
-                statusCode: 200,
-                body: data.joke,
-            }))
-                .catch((error) => ({ statusCode: 422, body: String(error) }));
+            try {
+                const response = await node_fetch_1.default(urlEndpoint);
+                const data = await response.json();
+                this.callback("null", {
+                    statusCode: 200,
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+            }
+            catch (exc) {
+                console.log(`send message exception ${exc}`);
+            }
             // console.log(`${k} f inside fetch`);
             // console.log(urlEndpoint);
         };
@@ -299,7 +305,7 @@ const bodyParser = (obj) => {
         userId,
     };
 };
-const handler = async (event, context) => {
+const handler = async (event, context, callback) => {
     if (event.httpMethod !== "POST") {
         return {
             statusCode: 400,
@@ -309,8 +315,10 @@ const handler = async (event, context) => {
     const recievedDetails = bodyParser(event.body);
     const parsedMessage = messageParser(recievedDetails.rawMessage);
     if (parsedMessage) {
-        const processor = new commandProcessor({ parsedMessage, rawData: recievedDetails });
-        processor.process();
+        if (callback) {
+            const processor = new commandProcessor({ parsedMessage, rawData: recievedDetails, callback });
+            processor.process();
+        }
     }
     return {
         statusCode: 200,
