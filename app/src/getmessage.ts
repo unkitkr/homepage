@@ -317,22 +317,12 @@ class commandProcessor {
     if (authRequired) {
       if (this.isAuthencated) {
         const res = await runner();
-        this.callback("null", {
-          statusCode: 200,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(res),
-        });
         return res;
       } else {
         return 401;
       }
     } else {
       const res = await runner();
-      this.callback("null", {
-        statusCode: 200,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(res),
-      });
       return res;
     }
   };
