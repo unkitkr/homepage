@@ -69,7 +69,10 @@ class commandProcessor {
     const paramString = qs.stringify(params);
     const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
     const k = fetch(urlEndpoint)
-      .then((response) => response.json())
+      .then((response) => {
+        console.log(response.json());
+        return response.json();
+      })
       .then((data) => {
         return data;
       })
