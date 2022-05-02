@@ -68,16 +68,12 @@ class commandProcessor {
   private sendMessage = async (action: string, params: { [key: string]: string }) => {
     const paramString = qs.stringify(params);
     const urlEndpoint = `https://api.telegram.org/bot${environmentVariables.TELEGRAM_BOT_ID}/${action}?${paramString}`;
-    try {
-      fetch(urlEndpoint)
-        .then((response) => response.json())
-        .then((data) => {
-          return data;
-        })
-        .catch((error) => ({ statusCode: 422, body: String(error) }));
-    } catch (e) {
-      console.log(`this is from fetch err`);
-    }
+    fetch(urlEndpoint)
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => ({ statusCode: 422, body: String(error) }));
     console.log(urlEndpoint);
   };
 
