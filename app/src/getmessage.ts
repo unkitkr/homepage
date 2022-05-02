@@ -76,7 +76,7 @@ class commandProcessor {
         })
         .catch((error) => ({ statusCode: 422, body: String(error) }));
     } catch (e) {
-      console.log(e);
+      console.log(`this is from fetch err`);
     }
     console.log(urlEndpoint);
   };
@@ -328,7 +328,7 @@ class commandProcessor {
   };
 
   public process = () => {
-    this.messageDispatcher().then((data) => console.log(data));
+    this.messageDispatcher().then((data) => console.log(`this is frm command runner ${data}`));
   };
 }
 
