@@ -15,7 +15,6 @@
                 <div class="blog-title">{{ article.title }}</div>
                 <div class="blog-description">{{ article.description }}</div>
                 <div class="read-more">
-                  {{ baseURL }}
                   <NuxtLink :to="`${baseURL}/${article.slug}`"> Read more →</NuxtLink>
                   <span class="blog-date float-right">{{ new Date(article.createdAt).toDateString() }}</span>
                 </div>
@@ -142,7 +141,7 @@ export default {
   layout: "header",
   data: () => {
     return {
-      baseURL: process.env.NODE_ENV === "development" ? "/blogs" : "http://unkitkr.xyz/blogs",
+      baseURL: process.env.NODE_ENV === "development" ? "/blogs" : "",
     };
   },
 };
