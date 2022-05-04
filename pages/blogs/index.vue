@@ -15,7 +15,8 @@
                 <div class="blog-title">{{ article.title }}</div>
                 <div class="blog-description">{{ article.description }}</div>
                 <div class="read-more">
-                  <NuxtLink :to="`blogs/${article.slug}`"> Read more →</NuxtLink>
+                  {{ baseURL }}
+                  <NuxtLink :to="`${baseURL}/${article.slug}`"> Read more →</NuxtLink>
                   <span class="blog-date float-right">{{ new Date(article.createdAt).toDateString() }}</span>
                 </div>
               </div>
@@ -132,13 +133,18 @@ a:hover {
 <script>
 export default {
   async asyncData({ $content }) {
+    console.log(process.env.NODE_ENV);
     const articles = await $content("/").only(["title", "description", "img", "slug", "author", "createdAt"]).sortBy("createdAt", "desc").fetch();
-    // console.log(articles);
     return {
       articles,
     };
   },
   layout: "header",
+  data: () => {
+    return {
+      baseURL: process.env.NODE_ENV === "development" ? "/blogs" : "http://unkitkr.xyz/blogs",
+    };
+  },
 };
 </script>
 

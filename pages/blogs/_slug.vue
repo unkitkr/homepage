@@ -33,9 +33,7 @@ body {
 <script>
 export default {
   async asyncData({ $content, params }) {
-    // console.log(params);
     const articles = await $content(params.slug).only(["title", "description", "body"]).fetch();
-    console.log(articles);
     return {
       articles,
     };
