@@ -31,7 +31,7 @@
                     <div v-for="items in this.statuses" :key="Object.keys(items)[0]">
                       <span class="date">{{ Object.keys(items)[0] }}</span>
                       <div v-for="status in items" :key="status.createdat" class="under-status-container">
-                        <div v-for="stat in status" :key="stat.createdat" class="test">
+                        <div v-for="stat in status.reverse()" :key="stat.createdat" class="test">
                           <span class="status-text-disp">{{ stat.status }}</span>
                           <span class="status-text-disp-time float-right">{{ String(new Date(stat.updatedat)).match(/\d\d:\d\d/)[0] }}</span>
                         </div>
@@ -53,12 +53,12 @@
 
 <style scoped>
 body {
-  background-color: rgb(8, 10, 14);
+  background-color: rgb(5, 5, 5);
 }
 .hero {
   min-height: calc(100vh - 100px);
-  background-color: rgb(8, 10, 14);
-  background-image: url("~assets/pattern-large-dots.svg");
+  background-color: rgb(5, 5, 5);
+  /* background-image: url("~assets/pattern-large-dots.svg"); */
   background-repeat: repeat;
   background-size: contain;
   font-family: "Open sans";
@@ -199,11 +199,9 @@ export default {
         element.createdat = new Date(element.createdat).toDateString();
       });
       const statusByDate = ldash.groupBy(status, "createdat");
-      const myData = Object.keys(statusByDate)
-        .reverse()
-        .map((key) => ({
-          [new Date(key).toDateString()]: statusByDate[key],
-        }));
+      const myData = Object.keys(statusByDate).map((key) => ({
+        [new Date(key).toDateString()]: statusByDate[key],
+      }));
       this.statuses = myData;
       const available = await responseAvail.json();
       this.availability = this.getCurrentStatusAndColor(available[0].currentstatus);

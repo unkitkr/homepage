@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: rgb(8, 10, 14)">
+  <div style="background-color: rgb(5, 5, 5)">
     <b-navbar type="light" variant="transparent" class="container">
       <b-navbar-brand to="/"
         ><span class="align-baseline"><b-icon-slash-circle-fill class="logo"></b-icon-slash-circle-fill></span> <span class="logo-txt align-top"> Ankit Kumar</span></b-navbar-brand

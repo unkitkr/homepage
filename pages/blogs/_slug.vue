@@ -15,12 +15,12 @@
 
 <style scoped>
 body {
-  background-color: rgb(8, 10, 14);
+  background-color: rgb(5, 5, 5);
 }
 .hero {
   min-height: calc(100vh - 100px);
-  background-color: rgb(8, 10, 14);
-  background-image: url("~assets/pattern-large-dots.svg");
+  background-color: rgb(5, 5, 5);
+  /* background-image: url("~assets/pattern-large-dots.svg"); */
   background-repeat: repeat;
   background-size: contain;
 }

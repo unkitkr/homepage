@@ -63,28 +63,37 @@ export default {
 @media screen and (max-width: 768px) {
   .intro-text {
     font-size: 3rem !important;
+    margin-top: 5rem !important;
   }
   .content-text {
     font-size: 1rem !important;
   }
   .content-sub-text {
     font-size: 0.8rem !important;
+  }
+  .hero {
+    background-size: contain;
   }
 }
 @media screen and (max-width: 640) {
   .intro-text {
     font-size: 3rem !important;
+    margin-top: 5rem !important;
   }
   .content-text {
     font-size: 1rem !important;
   }
   .content-sub-text {
     font-size: 0.8rem !important;
+  }
+  .hero {
+    background-size: contain;
   }
 }
 @media screen and (max-width: 340px) {
   .intro-text {
     font-size: 3rem !important;
+    margin-top: 5rem !important;
   }
   .content-text {
     font-size: 1rem !important;
@@ -92,16 +101,20 @@ export default {
   .content-sub-text {
     font-size: 0.8rem !important;
   }
+  .hero {
+    background-size: contain;
+  }
 }
 body {
-  background-color: rgb(8, 10, 14);
+  background-color: rgb(5, 5, 5);
 }
 .hero {
   min-height: calc(100vh - 100px);
-  background-color: rgb(8, 10, 14);
-  background-image: url("~assets/pattern-large-dots.svg");
+  background-color: rgb(5, 5, 5);
+  width: 100%;
+  /* background-image: url("~assets/pattern-large-dots.svg"); */
   background-repeat: repeat;
-  background-size: contain;
+  /* background-size: contain; */
 }
 .intro-text {
   font-size: 3.5rem;
