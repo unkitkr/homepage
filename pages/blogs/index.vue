@@ -141,7 +141,7 @@ export default {
   layout: "header",
   data: () => {
     return {
-      baseURL: process.env.NODE_ENV === "development" ? "/blogs" : "/blogs",
+      baseURL: process.env.NODE_ENV === "development" ? "/blogs" : "",
     };
   },
 };
