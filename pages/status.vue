@@ -31,7 +31,7 @@
                     <div v-for="items in this.statuses" :key="Object.keys(items)[0]">
                       <span class="date">{{ Object.keys(items)[0] }}</span>
                       <div v-for="status in items" :key="status.createdat" class="under-status-container">
-                        <div v-for="stat in status.reverse()" :key="stat.createdat" class="test">
+                        <div v-for="stat in status" :key="stat.createdat" class="test">
                           <span class="status-text-disp">{{ stat.status }}</span>
                           <span class="status-text-disp-time float-right">{{ String(new Date(stat.updatedat)).match(/\d\d:\d\d/)[0] }}</span>
                         </div>
