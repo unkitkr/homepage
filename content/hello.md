@@ -1,44 +1,30 @@
 ---
-title: Glad that I wrote this
-description: 'Empower your NuxtJS application with @nuxt/content module.'
-author: ankit
+title: 'An informal hello'
+description: 'Notes for future me about what I want to do here.'
+author: 'Ankit Kumar'
 ---
 
-Empower your NuxtJS application with `@nuxtjs/content` module: write in a `content/` directory and fetch your Markdown, JSON, YAML and CSV files through a MongoDB like API, acting as a **Git-based Headless CMS**.
-
-## Writing content
-
-Learn how to write your `content/`, supporting Markdown, YAML, CSV and JSON: https://content.nuxtjs.org/writing.
-
-## Fetching content
-
-Learn how to fetch your content with `$content`: https://content.nuxtjs.org/fetching.
-
-## Displaying content
-
-Learn how to display your Markdown content with the `json <nuxt-content>` component directly in your template: https://content.nuxtjs.org/displaying.
-
-```cpp
-int yaay = 7
-
-int main(){
-  return 0
-}
-```
-| Syntax      | Description |
-| ----------- | ----------- |
-| Header      | Title       |
-| Paragraph   | Text        |
+I've always wanted to build a confined space where I write words that makes (some) sense.
+The possibility of my words or work making sense to you depends on what type of person/ mindset you bring in 
+while reading about me/my essays.
 
 
-Here's a simple footnote,[^1] and here's a longer one.[^bignote]
 
-[^1]: This is the first footnote.
 
-[^bignote]: Here's one with multiple paragraphs and code.
+**I want to ink this space writing about my interests:**
+1. Working with computers in general.
+2. Taking to computers. (Programing paradigms).
+3. Decentralization. (I'm new to this but surely would love to explore it outside ape faces and coins/tokens).
+4. Explorations. (I'm not sure how to describe this category but whatever is new to me is exploration).
+5. Psychology. (A naive perspective on mental health, mostly from my experiences).
+6. Product/Program management. (This is where I'm heading towards and hope to master skills).
+7. Design, interaction with digital components, and exploring how we can do that better is what intrigue me.
+8. Random/Misc. (Anything which comes to my mind and doesn't fit in the above categories). 
 
-    Indent paragraphs to include them in the footnote.
 
-    `{ my code }`
 
-    Add as many paragraphs as you like.
+The plan I laid out above is just a plan and not an **execution**.
+
+>Plan is not a promise and execution is not an outcome. 
+
+Having said that, `hello world`.

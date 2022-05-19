@@ -16,7 +16,7 @@
                 <div class="blog-description">{{ article.description }}</div>
                 <div class="read-more">
                   <NuxtLink :to="`${baseURL}/${article.slug}`"> Read more →</NuxtLink>
-                  <span class="blog-date float-right">{{ new Date(article.createdAt).toDateString() }}</span>
+                  <span class="blog-date float-right">{{ new Date(article.updatedAt).toDateString() }}</span>
                 </div>
               </div>
             </div>
@@ -45,6 +45,7 @@
 
 body {
   background-color: rgb(5, 5, 5);
+  overflow: hidden;
 }
 
 .hero {
@@ -133,7 +134,7 @@ a:hover {
 export default {
   async asyncData({ $content }) {
     console.log(process.env.NODE_ENV);
-    const articles = await $content("/").only(["title", "description", "img", "slug", "author", "createdAt"]).sortBy("createdAt", "desc").fetch();
+    const articles = await $content("/").only(["title", "description", "img", "slug", "author", "updatedAt"]).sortBy("createdAt", "desc").fetch();
     return {
       articles,
     };
