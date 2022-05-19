@@ -5,8 +5,9 @@
         <b-row>
           <b-col md="2"> </b-col>
           <b-col md="8">
-            <div class="article-date">{{ new Date(articles.updatedAt).toDateString() }}</div>
+            <div class="article-date">{{ moment(articles.updatedAt).format("MMMM Do YYYY") }}</div>
             <h1 class="article-title">{{ articles.title }}</h1>
+            <h6 class="article-description">{{ articles.description }}</h6>
             <nuxt-content :document="articles" tag="article" />
           </b-col>
           <b-col md="2"> </b-col>
@@ -35,6 +36,7 @@ html {
   margin-top: 50px;
   font-size: 18px;
   font-weight: 400;
+  padding-bottom: 50px;
 }
 a {
   color: rgb(255, 255, 255) !important;
@@ -48,8 +50,13 @@ a {
 .article-title {
   text-align: center;
   color: rgb(255, 255, 255);
-  margin-bottom: 40px;
+
   font-weight: 700;
+}
+.article-description {
+  color: rgb(194, 194, 194);
+  text-align: center;
+  margin-bottom: 40px;
 }
 li {
   margin-bottom: 4px;
@@ -67,6 +74,7 @@ blockquote {
 </style>
 
 <script>
+import moment from "moment";
 export default {
   async asyncData({ $content, params }) {
     const articles = await $content(params.slug).only(["title", "description", "body", "createdAt", "updatedAt"]).fetch();
@@ -75,6 +83,11 @@ export default {
     };
   },
   layout: "header",
+  computed: {
+    moment() {
+      return moment;
+    },
+  },
   data() {
     return {
       params: this.$route.params.slug,
