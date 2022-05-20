@@ -81,4 +81,7 @@ export default {
     apiKey: process.env.API_KEY_GET,
     baseURL: process.env.API_BASE_URL,
   },
+  static: {
+    prefix: false,
+  },
 };
