@@ -20,7 +20,7 @@
     "bootstrap": "^4.6.1",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.19.3",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
     "node-fetch": "^2.6.7",
