@@ -40,6 +40,9 @@ const handler: Handler = async (event, context) => {
       (await statusDb.select().all()).forEach((stat) => statuses.push(stat.fields));
       return {
         statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify(statuses),
       };
     }
@@ -48,11 +51,20 @@ const handler: Handler = async (event, context) => {
       (await availableDb.select().all()).forEach((av) => available.push(av.fields));
       return {
         statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify(available),
       };
     }
     default: {
-      return { statusCode: 404, body: "Not found" };
+      return {
+        statusCode: 404,
+        body: "Not found",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      };
     }
   }
 };
