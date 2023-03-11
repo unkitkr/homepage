@@ -13,48 +13,57 @@ const db = new airtable_1.default({
 }).base(environmentVariables.AIRTABLE_BASE_ID);
 const statusDb = db.table(environmentVariables.API_KEY_STATUS_DB);
 const availableDb = db.table(environmentVariables.API_KEY_AVAILABLE_DB);
+const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "*",
+    "Access-Control-Allow-Methods": "*",
+    "content-type": "application/json",
+};
 const handler = async (event, context) => {
+    console.log(event.path.split("/"));
+    console.log("x-api-key" in event.headers);
     if (event.httpMethod !== "GET") {
-        return {
-            statusCode: 400,
-            body: "Method not allowed",
+        const payload = {
+            statusCode: 200,
+            headers,
+            body: JSON.stringify({ error: "Method not allowed" }),
         };
+        console.log(payload);
+        return payload;
     }
     if (!("x-api-key" in event.headers) || event.headers["x-api-key"] !== environmentVariables.NUXT_ENV_API_KEY_GET) {
         return {
-            statusCode: 401,
-            body: "Not authorized",
+            statusCode: 200,
+            body: JSON.stringify({ error: "Not authorized" }),
+            headers,
         };
     }
     const endpointSplit = event.path.split("/");
     const endpoint = endpointSplit[endpointSplit.length - 1];
-    console.log(endpoint);
     switch (endpoint) {
         case "ping": {
             return {
                 statusCode: 200,
                 body: "OK",
+                headers,
             };
         }
         case "status": {
             const statuses = [];
             (await statusDb.select().all()).forEach((stat) => statuses.push(stat.fields));
-            return {
+            const payload = {
                 statusCode: 200,
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                },
+                headers,
                 body: JSON.stringify(statuses),
             };
+            return payload;
         }
         case "available": {
             const available = [];
             (await availableDb.select().all()).forEach((av) => available.push(av.fields));
             return {
                 statusCode: 200,
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                },
+                headers,
                 body: JSON.stringify(available),
             };
         }
@@ -62,9 +71,7 @@ const handler = async (event, context) => {
             return {
                 statusCode: 404,
                 body: "Not found",
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                },
+                headers,
             };
         }
     }
