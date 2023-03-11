@@ -20,10 +20,9 @@ const headers = {
     "content-type": "application/json",
 };
 const handler = async (event, context) => {
-    console.log(event.path.split("/"));
-    console.log("x-api-key" in event.headers);
     if (event.httpMethod !== "GET") {
         const payload = {
+            // mfking preflight. too lazy to setup proxy
             statusCode: 200,
             headers,
             body: JSON.stringify({ error: "Method not allowed" }),
@@ -33,6 +32,7 @@ const handler = async (event, context) => {
     }
     if (!("x-api-key" in event.headers) || event.headers["x-api-key"] !== environmentVariables.NUXT_ENV_API_KEY_GET) {
         return {
+            // mfking preflight. too lazy to setup proxy
             statusCode: 200,
             body: JSON.stringify({ error: "Not authorized" }),
             headers,

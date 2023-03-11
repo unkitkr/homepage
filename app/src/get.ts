@@ -20,8 +20,6 @@ const headers = {
 };
 
 const handler: Handler = async (event, context) => {
-  console.log(event.path.split("/"));
-  console.log("x-api-key" in event.headers);
   if (event.httpMethod !== "GET") {
     const payload = {
       // mfking preflight. too lazy to setup proxy
