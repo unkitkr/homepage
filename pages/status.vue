@@ -184,17 +184,17 @@ export default {
     async getStatuses() {
       const responseStatuses = await fetch(`${process.env.NUXT_ENV_API_BASE_URL}/get/status`, {
         method: "GET",
-        // headers: {
-        //   "x-api-key": process.env.NUXT_ENV_API_KEY_GET,
-        // },
-        // mode: "cors",
+        headers: {
+          "x-api-key": process.env.NUXT_ENV_API_KEY_GET,
+        },
+        mode: "cors",
       });
       const responseAvail = await fetch(`${process.env.NUXT_ENV_API_BASE_URL}/get/available`, {
         method: "GET",
-        // headers: {
-        //   "x-api-key": process.env.NUXT_ENV_API_KEY_GET,
-        // },
-        // mode: "cors",
+        headers: {
+          "x-api-key": process.env.NUXT_ENV_API_KEY_GET,
+        },
+        mode: "cors",
       });
       const status = await responseStatuses.json();
       status.forEach((element) => {
