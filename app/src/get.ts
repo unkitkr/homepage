@@ -20,24 +20,24 @@ const headers = {
 };
 
 const handler: Handler = async (event, context) => {
-  if (event.httpMethod !== "GET") {
-    const payload = {
-      // mfking preflight. too lazy to setup proxy
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({ error: "Method not allowed" }),
-    };
-    console.log(payload);
-    return payload;
-  }
-  if (!("x-api-key" in event.headers) || event.headers["x-api-key"] !== environmentVariables.NUXT_ENV_API_KEY_GET!) {
-    return {
-      // mfking preflight. too lazy to setup proxy
-      statusCode: 200,
-      body: JSON.stringify({ error: "Not authorized" }),
-      headers,
-    };
-  }
+  // if (event.httpMethod !== "GET") {
+  //   const payload = {
+  //     // mfking preflight. too lazy to setup proxy
+  //     statusCode: 200,
+  //     headers,
+  //     body: JSON.stringify({ error: "Method not allowed" }),
+  //   };
+  //   console.log(payload);
+  //   return payload;
+  // }
+  // if (!("x-api-key" in event.headers) || event.headers["x-api-key"] !== environmentVariables.NUXT_ENV_API_KEY_GET!) {
+  //   return {
+  //     // mfking preflight. too lazy to setup proxy
+  //     statusCode: 200,
+  //     body: JSON.stringify({ error: "Not authorized" }),
+  //     headers,
+  //   };
+  // }
   const endpointSplit = event.path.split("/");
   const endpoint = endpointSplit[endpointSplit.length - 1];
   switch (endpoint) {
